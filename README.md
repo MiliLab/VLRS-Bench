@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="fig/logo_vlrs.png" alt="VLRS-Bench Logo" width="150" height="150">
+<img src="figs/logo_vlrs.png" alt="VLRS-Bench Logo" width="150" height="150">
 
 # VLRS-Bench: A Vision-Language Reasoning Benchmark for Remote Sensing
 
@@ -34,7 +34,7 @@ Recent advancements in Multimodal Large Language Models (MLLMs) have revolutioni
 
 VLRS-Bench is structured around a scientifically grounded taxonomy inspired by cognitive neuroscience. We define 14 fine-grained tasks across three core dimensions.
 <div align="center">
-<img src="fig/primary_rrs.png" alt="Reasoning Hierarchy">
+<img src="figs/primary_rrs.png" alt="Reasoning Hierarchy">
 </div>
 
 ### 1. Cognition (Why is this?)
@@ -74,7 +74,7 @@ VLRS-Bench is structured around a scientifically grounded taxonomy inspired by c
 ## 🛠️ Dataset Construction
 
 <div align="center">
-<img src="fig/figure_rrs.png" alt="Construction Pipeline">
+<img src="figs/figure_rrs.png" alt="Construction Pipeline">
 </div>
 
 VLRS-Bench is constructed via a highly automated pipeline that integrates **RS-specific priors** (DSM, NIR, Expert Masks) to ensure geospatial realism.
