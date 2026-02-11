@@ -197,7 +197,7 @@ The images sourced from public datasets (DOTA, LoveDA, etc.) adhere to their ori
 If you find **VLRS-Bench** useful for your research, please cite our paper:
 
 ```bibtex
-@misc{luo2026vlrsbenchvisionlanguagereasoningbenchmark,
+@article{vlrsbench,
       title={VLRS-Bench: A Vision-Language Reasoning Benchmark for Remote Sensing}, 
       author={Zhiming Luo and Di Wang and Haonan Guo and Jing Zhang and Bo Du},
       year={2026},
