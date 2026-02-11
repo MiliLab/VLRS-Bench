@@ -6,7 +6,7 @@
 
 [![Paper](https://img.shields.io/badge/Under_Review-b31b1b.svg)](https://your-paper-link-here)
 [![Dataset](https://img.shields.io/badge/Dataset-HuggingFace-FFD21E.svg)](https://huggingface.co/datasets/your-link)
-[![License](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 
 **The first benchmark exclusively dedicated to complex geospatial reasoning: Cognition, Decision, and Prediction.**
