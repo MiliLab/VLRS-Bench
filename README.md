@@ -4,7 +4,7 @@
 
 # VLRS-Bench: A Vision-Language Reasoning Benchmark for Remote Sensing
 
-[![Paper](https://img.shields.io/badge/Under_Review-b31b1b.svg)]([https://your-paper-link-here](https://arxiv.org/abs/2602.07045))
+[![Paper](https://img.shields.io/badge/Under_Review-b31b1b.svg)]((https://arxiv.org/abs/2602.07045))
 [![Dataset](https://img.shields.io/badge/Dataset-HuggingFace-FFD21E.svg)](https://huggingface.co/datasets/your-link)
 [![License](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
