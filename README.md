@@ -1,218 +1,256 @@
 <div align="center">
 
-<img src="figs/logo_vlrs.png" alt="VLRS-Bench Logo" width="150" height="150">
+<img src="figs/logo_vlrs.png" alt="VLRS-Bench Logo" width="130">
 
-# VLRS-Bench: A Vision-Language Reasoning Benchmark for Remote Sensing
+# VLRS-Bench
+
+### A Vision-Language Reasoning Benchmark for Remote Sensing
 
 [![Paper](https://img.shields.io/badge/arXiv-2602.07045-b31b1b.svg)](https://arxiv.org/abs/2602.07045)
-[![Dataset](https://img.shields.io/badge/Dataset-HuggingFace-FFD21E.svg)](https://huggingface.co/datasets/thislzm/VLRS-Bench)
-[![License](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![Dataset](https://img.shields.io/badge/Dataset-Hugging%20Face-FFD21E.svg)](https://huggingface.co/datasets/thislzm/VLRS-Bench)
+[![Project](https://img.shields.io/badge/Project-GitHub-24292f.svg)](https://github.com/MiliLab/VLRS-Bench)
+[![License](https://img.shields.io/badge/License-CC--BY--4.0-green.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-**The first benchmark exclusively dedicated to complex geospatial reasoning: Cognition, Decision, and Prediction.**
+**VLRS-Bench evaluates whether multimodal large language models can reason over geospatial scenes, not merely recognize remote-sensing objects.**
 
-[**Introduction**](#-introduction) | [**Hierarchy & Tasks**](#-reasoning-hierarchy) | [**Data Pipeline**](#%EF%B8%8F-dataset-construction) | [**Leaderboard**](#-leaderboard) | [**Get Started**](#-getting-started) | [**License**](#-license) | [**Citation**](#%EF%B8%8F-citation)
+[Overview](#overview) · [Examples](#representative-examples) · [Taxonomy](#reasoning-taxonomy) · [Dataset](#dataset) · [Construction](#construction-pipeline) · [Evaluation](#evaluation) · [Citation](#citation)
 
 </div>
 
 ---
 
-## 📖 Introduction
+## Overview
 
-Recent advancements in Multimodal Large Language Models (MLLMs) have revolutionized visual understanding. However, existing Remote Sensing (RS) benchmarks remain heavily biased toward **perception tasks** (object recognition, scene classification). They fail to evaluate the *cognitive depth* required for real-world Earth Observation applications.
+Recent multimodal large language models have made rapid progress in visual understanding, but remote sensing benchmarks still largely emphasize perception tasks such as object recognition, counting, and scene classification. Real Earth-observation applications often require a deeper form of reasoning: explaining why a spatial pattern emerges, deciding what action should be taken under constraints, and predicting how a landscape may evolve.
 
-**VLRS-Bench** bridges this gap. It is a rigorous evaluation framework comprising **2,000 expert-verified reasoning QA** derived from **11 diverse datasets**. 
+**VLRS-Bench** is designed for this gap. It is a complex remote sensing reasoning benchmark built around three dimensions:
 
-### 🚀 Key Features
+- **Cognition:** understand causal, counterfactual, mechanistic, semantic, and spatiotemporal relations.
+- **Decision:** formulate and evaluate spatial plans under operational constraints.
+- **Prediction:** forecast object-level and scene-level future states from temporal evidence.
 
-* **🧠 Structured Reasoning:** Decomposed into **3** Dimensions, **6** Abilities, and **14** Fine-grained Tasks.
-* **⏳ Temporal Depth:** Spans up to **8 temporal phases** for complex predictive reasoning.
-* **🔥 High Complexity:** Average question length of **~71 words**, demanding multi-step logic rather than simple visual matching.
+### Key Numbers
 
----
-## 🧠 Reasoning Hierarchy
+| Property | Value |
+|---|---:|
+| QA pairs | **2,000** |
+| Images | **3,180** |
+| Reasoning dimensions | **3** |
+| Ability groups | **6** |
+| Fine-grained tasks | **14** |
+| QA formats | **4** |
+| Average question length | **130.17 words** |
+| Temporal phases per item | up to **8** |
+| Source datasets | **11 public RS datasets** |
 
-VLRS-Bench is structured around a scientifically grounded taxonomy inspired by cognitive neuroscience. We define 14 fine-grained tasks across three core dimensions.
+## Representative Examples
+
+The three examples below are selected from the detailed case visualizations in the paper appendix. They show how VLRS-Bench moves from static spatial reasoning to operational decision-making and multi-temporal forecasting.
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="assets/readme/example_cognition.png" alt="Cognition example">
+      <br>
+      <b>Cognition</b><br>
+      Causal reasoning over spatial structure
+    </td>
+    <td align="center" width="33%">
+      <img src="assets/readme/example_decision.png" alt="Decision example">
+      <br>
+      <b>Decision</b><br>
+      Planning under operational constraints
+    </td>
+    <td align="center" width="33%">
+      <img src="assets/readme/example_prediction.png" alt="Prediction example">
+      <br>
+      <b>Prediction</b><br>
+      Multi-temporal scenario forecasting
+    </td>
+  </tr>
+</table>
+
+## Reasoning Taxonomy
+
+VLRS-Bench decomposes remote sensing reasoning into 3 L-1 dimensions, 6 L-2 ability groups, and 14 L-3 tasks.
+
 <div align="center">
-<img src="figs/primary_rrs.png" alt="Reasoning Hierarchy">
+  <img src="figs/primary_rrs.png" alt="VLRS-Bench reasoning taxonomy">
 </div>
 
-### 1. Cognition (Why is this?)
-*Focuses on understanding the underlying causes and mechanisms of the observed scene.*
+### Cognition
 
-| Ability | Task | Description |
-| :--- | :--- | :--- |
-| **Spatial Cognitive (SC)** | **CR** (Causal Reasoning) | Identifying latent etiological factors driving phenomena (e.g., "Why is vegetation sparse here?"). |
-| | **CFR** (Counterfactual Reasoning) | Simulating alternative scenarios (e.g., "If the river level rose 2m, would the bridge flood?"). |
-| | **SIR** (Semantic Integration Reasoning) | Synthesizing visual primitives into regional semantics (e.g., classifying functional zones). |
-| | **MIR** (Mechanistic Integration Reasoning) | Inferring implicit physical interactions/feedback loops between objects. |
-| **Spatiotemporal (ST-C)** | **ST-CCR** (Spatiotemporal Causal-Chain Reasoning) | Inferring causal event chains across multiple time steps. |
-| | **ST-CFR** (Spatiotemporal Counterfactual Reasoning) | Exploring trajectories by modifying past events in a sequence. |
-| | **ST-ER** (Spatiotemporal Evolution Reasoning) | Capturing functional transformations of regions over time. |
-| | **ST-CR** (Spatiotemporal Consistency Reasoning) | Verifying logical coherence of temporal changes. |
+| Ability group | Task | What it evaluates |
+|---|---|---|
+| Spatial Cognitive | `CR` Causal Reasoning | Inferring latent causes behind observed spatial patterns |
+| Spatial Cognitive | `CFR` Counterfactual Reasoning | Reasoning under hypothetical spatial interventions |
+| Spatial Cognitive | `MIR` Mechanistic Interaction Reasoning | Inferring physical interactions and feedback mechanisms |
+| Spatial Cognitive | `SIR` Semantic Integration Reasoning | Integrating local cues into high-level regional semantics |
+| Spatiotemporal Cognitive | `ST-CCR` Spatiotemporal Causal-Chain Reasoning | Explaining causal event chains across time |
+| Spatiotemporal Cognitive | `ST-CFR` Spatiotemporal Counterfactual Reasoning | Inferring alternative temporal trajectories |
+| Spatiotemporal Cognitive | `ST-ER` Spatiotemporal Evolution Reasoning | Understanding functional transformation over time |
+| Spatiotemporal Cognitive | `ST-CR` Spatiotemporal Consistency Reasoning | Checking temporal coherence under geospatial constraints |
 
-### 2. Decision (How to do?)
-*Focuses on actionable planning based on visual evidence.*
+### Decision
 
-| Ability | Task | Description |
-| :--- | :--- | :--- |
-| **Pre-event (Pre-D)** | **PR** (Planning Reasoning) | Formulating spatially optimized solutions (e.g., "Plan a rescue route avoiding flooded areas"). |
-| **Post-event (Post-D)** | **ER** (Evaluation Reasoning) | Assessing feasibility and robustness of candidate plans. |
+| Ability group | Task | What it evaluates |
+|---|---|---|
+| Pre-event Decision | `PR` Planning Reasoning | Generating spatially feasible plans under constraints |
+| Post-event Decision | `ER` Evaluation Reasoning | Auditing the feasibility and robustness of proposed plans |
 
-### 3. Prediction (What will happen?)
-*Focuses on forecasting future states based on historical sequences.*
+### Prediction
 
-| Ability | Task | Description |
-| :--- | :--- | :--- |
-| **Object-level (OP)** | **ST-CS-PR** (Spatiotemporal Category-State Prediction Reasoning) | Predicting semantic state transitions of specific entities. |
-| | **ST-M-PR** (Spatiotemporal Morphological Prediction Reasoning) | Extrapolating geometric evolution and shape changes. |
-| **Scene-level (SP)** | **ST-SU-PR** (Spatiotemporal Scenario Uncertainty Prediction Reasoning) | Probabilistic forecasting of multiple potential future trajectories. |
-| | **ST-SQ-PR** (Spatiotemporal Sequence Prediction Reasoning) | Predicting overall scene-level states via temporal dependencies. |
+| Ability group | Task | What it evaluates |
+|---|---|---|
+| Object-level Predictive | `ST-CS-PR` Category-State Prediction | Predicting semantic state transitions of entities |
+| Object-level Predictive | `ST-M-PR` Morphological Prediction | Forecasting geometric shape or footprint evolution |
+| Scene-level Predictive | `ST-SU-PR` Scenario Uncertainty Prediction | Modeling multiple plausible future trajectories |
+| Scene-level Predictive | `ST-SQ-PR` Sequence Prediction | Predicting the next stage in a temporal scene sequence |
 
----
+## Dataset
 
-## 🛠️ Dataset Construction
+The released benchmark is hosted on Hugging Face:
+
+- Dataset page: [huggingface.co/datasets/thislzm/VLRS-Bench](https://huggingface.co/datasets/thislzm/VLRS-Bench)
+- Annotation file: [`VLRS-Bench.json`](https://huggingface.co/datasets/thislzm/VLRS-Bench/blob/main/VLRS-Bench.json)
+- Image folder: [`images/`](https://huggingface.co/datasets/thislzm/VLRS-Bench/tree/main/images)
+
+The JSON file uses a conversation-style structure:
+
+```json
+{
+  "id": "VLRS_00001",
+  "job": "PR",
+  "qa_type": "fill_blank",
+  "image": ["images/img_00001.jpg"],
+  "conversations": [
+    {
+      "from": "human",
+      "value": "<image>\n..."
+    },
+    {
+      "from": "gpt",
+      "value": "..."
+    }
+  ],
+  "times": []
+}
+```
+
+For multi-temporal samples, `image` contains multiple ordered image paths and `times` stores the corresponding temporal labels.
+
+### Loading Example
+
+```python
+from datasets import load_dataset
+from huggingface_hub import hf_hub_download
+from PIL import Image
+
+repo_id = "thislzm/VLRS-Bench"
+
+dataset = load_dataset(
+    "json",
+    data_files=f"https://huggingface.co/datasets/{repo_id}/resolve/main/VLRS-Bench.json",
+    split="train",
+)
+
+sample = dataset[0]
+print(sample["id"], sample["job"], sample["qa_type"])
+print(sample["conversations"][0]["value"])
+print(sample["conversations"][1]["value"])
+
+image_path = hf_hub_download(
+    repo_id=repo_id,
+    repo_type="dataset",
+    filename=sample["image"][0],
+)
+image = Image.open(image_path).convert("RGB")
+```
+
+## Construction Pipeline
+
+VLRS-Bench is built through a remote-sensing-aware generation and verification pipeline. During construction, each RGB scene is enriched with auxiliary priors such as DSM, NIR, expert masks, temporal references, dataset metadata, and task-specific prompts.
 
 <div align="center">
-<img src="figs/figure_rrs.png" alt="Construction Pipeline">
+  <img src="figs/figure_rrs.png" alt="VLRS-Bench construction pipeline">
 </div>
 
-VLRS-Bench is constructed via a highly automated pipeline that integrates **RS-specific priors** (DSM, NIR, Expert Masks) to ensure geospatial realism.
+The pipeline has four major stages:
 
-Unlike traditional benchmarks that merely annotate visual objects, our pipeline integrates **multimodal priors (DSM, NIR)** and **expert knowledge** during the *data generation phase*. This allows us to create high-complexity reasoning QA pairs that challenge standard RGB models to infer hidden attributes (e.g., building height, vegetation health) from visual cues alone.
+1. **Data preparation.** We curate imagery from 11 public remote sensing datasets, including LoveDA, Potsdam, Vaihingen, GID-15, DIOR, DOTA, FAIR1M, xView2, SECOND, miniUCD, and SpaceNet7.
+2. **Prior-enriched instruction synthesis.** RGB imagery is combined with remote sensing priors such as DSM, NIR, expert pixel-level masks, temporal references, mask palettes, and dataset metadata.
+3. **Reasoning QA generation.** GPT-5-chat generates QA pairs aligned with the 14 reasoning tasks and four QA formats.
+4. **Quality verification.** Items are filtered through automated checks, multi-MLLM cross-validation, and human expert review.
 
+The final benchmark was selected from more than 6,500 generated candidates. Automated filtering and cross-model verification retained 2,694 candidates; nine Ph.D.-level remote sensing experts then reviewed them for professional relevance, logical rigor, visual grounding, and answer correctness, yielding the final 2,000-item benchmark.
 
-### 🔬 Detailed Steps
+## Evaluation
 
-#### 1. Prior Injection & Multi-Source Fusion
+VLRS-Bench uses format-specific scoring:
 
-We do not rely solely on RGB images. We aggregate multi-source data to establish a "God's Eye View" of the scene context:
+| Format | Scoring |
+|---|---|
+| Single-choice | 1 point for the correct option |
+| True/false | 1 point for the correct judgment |
+| Multi-choice | 1.0 for perfect selections, 0.5 for incomplete but error-free selections, 0 for any incorrect option |
+| Fill-in-the-blank | semantic similarity scoring with `all-MiniLM-L6-v2`; partial credit is supported |
 
-* **RGB Imagery:** The base visual input (from FAIR1M, xView2, etc.).
-* **DSM (Digital Surface Model):** Provides absolute **height information** and **3D geometry**, essential for reasoning about building density and terrain.
-* **NIR (Near-Infrared):** Provides spectral indices (e.g., NDVI) to determine **vegetation health**, water content, and material properties invisible to the naked eye.
+Overall performance is reported as the mean score across all benchmark questions.
 
-To allow the LLM to "see" the image accurately without visual encoders, we developed the **Mask Info Palette**.
+## Results Snapshot
 
-* **Segmentation:** We utilize **SAMRS** (Segment Anything for Remote Sensing) to convert bounding boxes into precise pixel-level masks.
-* **Palette Mapping:** We map visual signals to semantic text descriptions.
-> *Example:* A region with `High DSM` + `Low NIR` + `Rectangular Mask`  **"High-density concrete building."**
+VLRS-Bench exposes clear bottlenecks in current MLLMs. Models generally perform better on constrained single-choice and true/false settings, while multi-choice and fill-in-the-blank questions remain substantially harder. Prediction tasks are especially challenging because they require models to extrapolate beyond the directly observed scene and reason over temporal uncertainty.
 
+The paper reports zero-shot results for a broad set of general and remote-sensing-specialized MLLMs, including GPT, Gemini, Claude, Grok, DeepSeek-VL, GLM, Llama, Qwen, GeoChat, VHM, and ScoreRS variants.
 
-#### 3. Task-Specific Instruction Generation
+## Repository Structure
 
-Using the *Mask Info Palette* as the "Ground Truth," we prompt advanced LLMs (e.g., GPT-5/4o) to generate questions.
-
-* **The Challenge:** The generator sees the priors (Height/NIR), but the question is phrased so that the **student model (Evaluation target) only sees the RGB**.
-* **Reasoning Gap:** The model must use logical reasoning (e.g., "shadow length implies height," "texture implies material") to answer, rather than simple recognition.
-
-#### 4. Rigorous Tri-Stage Verification
-
-To ensure the benchmark is error-free and logically sound, every QA pair undergoes a strict filtration process:
-
-| Stage | Method | Criteria | Pass Rate |
-| --- | --- | --- | --- |
-| **I. Auto-Filter** | Rule-based | Removes QAs with <15 words, extreme ambiguity, or format errors. | ~85% |
-| **II. Model Check** | Multi-Agent | A "Proposer" model generates answers; an "Evaluator" model verifies if the logic path is consistent. | ~64% |
-| **III. Expert Review** | **PhD Humans** | Remote Sensing experts verify the *geospatial correctness* (e.g., is the flood prediction physically possible?). | **~48%** |
-
-> 💡 **Technical Note:** While we use DSM and NIR to *generate* the ground truth, **VLRS-Bench is an RGB-only benchmark during inference**. This simulates real-world constraints where auxiliary data is often unavailable.
-
-
----
-
-## 🏆 Leaderboard
-
-Evaluation of state-of-the-art MLLMs on VLRS-Bench (Zero-shot setting).  
-*Note: Scores represent accuracy/weighted scores. **X** indicates the model does not support multi-image inputs required for that task.*
-
-### Main Results (Table 2)
-
-| Models | **Cognition** <br> CR / CFR / SIR / MIR | **Cognition (ST)** <br> ST-CFR / ST-CCR / ST-ER / ST-CR | **Decision** <br> ER / PR | **Prediction** <br> CS-PR / M-PR / SU-PR / SQ-PR |
-| :--- | :---: | :---: | :---: | :---: |
-| **General MLLMs** | | | | |
-| **GPT-5-chat** | 0.424 / 0.400 / 0.472 / 0.316 | 0.276 / 0.352 / 0.380 / 0.368 | 0.388 / 0.388 | 0.334 / 0.286 / 0.388 / 0.416 |
-| **GPT-4o** (2024-11) | 0.376 / 0.432 / 0.420 / 0.332 | 0.360 / 0.352 / 0.400 / 0.364 | 0.334 / 0.286 | 0.276 / 0.352 / 0.280 / 0.284 |
-| **GPT-4o-mini** | 0.428 / 0.416 / 0.428 / 0.328 | 0.400 / 0.356 / 0.352 / 0.336 | 0.248 / 0.304 | 0.424 / 0.372 / 0.280 / 0.304 |
-| **Gemini-2.5-flash**| 0.200 / 0.188 / 0.264 / 0.240 | 0.188 / 0.160 / 0.116 / 0.160 | 0.232 / 0.240 | 0.164 / 0.168 / 0.116 / 0.152 |
-| **Claude-3.5-haiku**| 0.308 / 0.316 / 0.304 / 0.360 | 0.192 / 0.208 / 0.232 / 0.200 | 0.372 / 0.370 | 0.208 / 0.224 / 0.248 / 0.168 |
-| **Qwen2.5-VL-72B** | 0.216 / 0.300 / 0.296 / 0.392 | 0.316 / 0.240 / 0.216 / 0.204 | 0.370 / 0.402 | 0.172 / 0.180 / 0.204 / 0.188 |
-| **Qwen3-VL-32B** | 0.372 / 0.416 / 0.476 / 0.316 | 0.408 / 0.428 / 0.388 / 0.392 | 0.416 / 0.364 | 0.388 / 0.456 / 0.336 / 0.372 |
-| **RS MLLMs** | | | | |
-| **GeoChat** | 0.280 / 0.332 / 0.360 / 0.308 | X / X / X / X | 0.356 / 0.352 | X / X / X / X |
-| **ScoreRS w/ SFT** | 0.403 / 0.367 / 0.421 / 0.345 | 0.294 / 0.310 / 0.288 / 0.284 | 0.419 / 0.382 | 0.341 / 0.320 / 0.313 / 0.295 |
-| **ScoreRS w/ RL** | 0.313 / 0.338 / 0.382 / 0.295 | 0.399 / 0.335 / 0.367 / 0.392 | 0.371 / 0.409 | 0.338 / 0.313 / 0.382 / 0.342 |
-
-### Benchmark Comparison (Table 1)
-
-VLRS-Bench significantly exceeds existing benchmarks in terms of RS-specific priors and reasoning complexity.
-
-| Benchmark | Data Source | Avg. QA Len | Type | Reason. Dim | Temporals | RS Priors |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **General Domain** | | | | | | |
-| MMBench | 10 Public Datasets | X | MCQ | 8 | X | X |
-| MMStar | 6 Public Benchmarks | X | MCQ | 6 | X | X |
-| **Remote Sensing** | | | | | | |
-| RSVQA | HR & LR Datasets | X | FF | X | X | X |
-| GeoChat | SAMRS, LRBEN | X | FF | X | X | BBox, Mask |
-| EarthVQA | LoveDA Dataset | X | FF | 3 | X | Mask |
-| XLRS-Bench | 6 Public Datasets | X | MCQ, TF | 6 | 2 | BBox |
-| **VLRS-Bench** | **11 Public Datasets** | **70.96** | **MCQ, FF, TF** | **14** | **8** | **BBox, Mask, DSM, NIR** |
-
----
-
-
-## 🚀 Getting Started
-
-### Installation
-
-```bash
-git clone [https://github.com/thislzm/VLRS-Bench.git](https://github.com/thislzm/VLRS-Bench.git)
-cd VLRS-Bench
+```text
+VLRS-Bench/
+├── README.md
+├── figs/
+│   ├── logo_vlrs.png
+│   ├── primary_rrs.png
+│   └── figure_rrs.png
+└── assets/
+    └── readme/
+        ├── example_cognition.png
+        ├── example_decision.png
+        └── example_prediction.png
 ```
 
-### Data Preparation
+The benchmark annotations and images are hosted on Hugging Face rather than stored directly in this GitHub repository.
 
-Download the dataset from BaiduYun and organize it as follows:
+## Intended Use
 
-```
-data/
-├── images/
-└── vlrs_bench.json
+VLRS-Bench is intended for:
 
-```
+- evaluating complex reasoning in general-purpose MLLMs;
+- benchmarking remote-sensing-specialized MLLMs beyond perception tasks;
+- studying cognition, decision, and prediction abilities in Earth-observation scenarios;
+- analyzing multi-image and multi-temporal geospatial QA behavior.
 
+VLRS-Bench is a research benchmark and should not be used as the sole basis for high-stakes operational decisions such as disaster response, emergency planning, or infrastructure deployment.
 
----
+## Citation
 
-## 📜 License
-
-This dataset is released under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License**.
-The images sourced from public datasets (DOTA, LoveDA, etc.) adhere to their original licenses.
-
----
-
-## 🖊️ Citation
-
-If you find **VLRS-Bench** useful for your research, please cite our paper:
+If VLRS-Bench is useful for your research, please cite:
 
 ```bibtex
-@article{vlrsbench,
-      title={VLRS-Bench: A Vision-Language Reasoning Benchmark for Remote Sensing}, 
-      author={Zhiming Luo and Di Wang and Haonan Guo and Jing Zhang and Bo Du},
-      year={2026},
-      eprint={2602.07045},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2602.07045}, 
+@article{luo2026vlrsbench,
+  title   = {VLRS-Bench: A Vision-Language Reasoning Benchmark for Remote Sensing},
+  author  = {Luo, Zhiming and Wang, Di and Wang, Hebaixu and Guo, Haonan and Zhang, Jing and Du, Bo},
+  journal = {arXiv preprint arXiv:2602.07045},
+  year    = {2026}
 }
-
 ```
+
+## License
+
+VLRS-Bench is released under the Creative Commons Attribution 4.0 International license. Source images are subject to the licenses and terms of their original public datasets.
 
 ---
 
 <div align="center">
-<p>Maintained by the VLRS-Bench Team</p>
+Maintained by the VLRS-Bench team.
 </div>
-
-```
