@@ -6,7 +6,10 @@
 
 ### A Vision-Language Reasoning Benchmark for Remote Sensing
 
-[![Paper](https://img.shields.io/badge/arXiv-2602.07045-b31b1b.svg)](https://arxiv.org/abs/2602.07045)
+**NeurIPS 2026 · Evaluations and Datasets Track**
+
+[![NeurIPS 2026](https://img.shields.io/badge/NeurIPS-2026-5B3CA4)](https://neurips.cc/virtual/2026/poster/139821)
+[![Preprint](https://img.shields.io/badge/arXiv-2602.07045-b31b1b.svg)](https://arxiv.org/abs/2602.07045)
 [![Dataset](https://img.shields.io/badge/Dataset-Hugging%20Face-FFD21E.svg)](https://huggingface.co/datasets/thislzm/VLRS-Bench)
 [![Project](https://img.shields.io/badge/Project-GitHub-24292f.svg)](https://github.com/MiliLab/VLRS-Bench)
 [![License](https://img.shields.io/badge/License-CC--BY--4.0-green.svg)](https://creativecommons.org/licenses/by/4.0/)
@@ -237,11 +240,13 @@ VLRS-Bench is a research benchmark and should not be used as the sole basis for 
 If VLRS-Bench is useful for your research, please cite:
 
 ```bibtex
-@article{luo2026vlrsbench,
-  title   = {VLRS-Bench: A Vision-Language Reasoning Benchmark for Remote Sensing},
-  author  = {Luo, Zhiming and Wang, Di and Wang, Hebaixu and Guo, Haonan and Zhang, Jing and Du, Bo},
-  journal = {arXiv preprint arXiv:2602.07045},
-  year    = {2026}
+@inproceedings{luo2026vlrsbench,
+  title     = {VLRS-Bench: A Vision-Language Reasoning Benchmark for Remote Sensing},
+  author    = {Luo, Zhiming and Wang, Hebaixu and Guo, Haonan and Zhang, Jing and Du, Bo},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026},
+  note      = {Evaluations and Datasets Track},
+  url       = {https://neurips.cc/virtual/2026/poster/139821}
 }
 ```
 
