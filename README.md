@@ -39,9 +39,9 @@ Recent multimodal large language models have made rapid progress in visual under
 | Ability groups | **6** |
 | Fine-grained tasks | **14** |
 | QA formats | **4** |
-| Average question length | **130.17 words** |
+| Average question length | **129.87 words** |
 | Temporal phases per item | up to **8** |
-| Source datasets | **11 public RS datasets** |
+| Source datasets | **10 public RS datasets** |
 
 ## Representative Examples
 
@@ -177,7 +177,7 @@ VLRS-Bench is built through a remote-sensing-aware generation and verification p
 
 The pipeline has four major stages:
 
-1. **Data preparation.** We curate imagery from 11 public remote sensing datasets, including LoveDA, Potsdam, Vaihingen, GID-15, DIOR, DOTA, FAIR1M, xView2, SECOND, miniUCD, and SpaceNet7.
+1. **Data preparation.** We curate imagery from 10 public remote sensing datasets, including LoveDA, Potsdam, Vaihingen, GID-15, DIOR, FAIR1M, xView2, SECOND, miniUCD, and SpaceNet7.
 2. **Prior-enriched instruction synthesis.** RGB imagery is combined with remote sensing priors such as DSM, NIR, expert pixel-level masks, temporal references, mask palettes, and dataset metadata.
 3. **Reasoning QA generation.** GPT-5-chat generates QA pairs aligned with the 14 reasoning tasks and four QA formats.
 4. **Quality verification.** Items are filtered through automated checks, multi-MLLM cross-validation, and human expert review.
@@ -195,7 +195,7 @@ VLRS-Bench uses format-specific scoring:
 | Multi-choice | 1.0 for perfect selections, 0.5 for incomplete but error-free selections, 0 for any incorrect option |
 | Fill-in-the-blank | semantic similarity scoring with `all-MiniLM-L6-v2`; partial credit is supported |
 
-Overall performance is reported as the mean score across all benchmark questions.
+Overall scores divide the total points by 2,000. Unanswered questions contribute zero.
 
 ## Results Snapshot
 
