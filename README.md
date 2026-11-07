@@ -198,7 +198,22 @@ VLRS-Bench uses format-specific scoring:
 | Multi-choice | 1.0 for perfect selections, 0.5 for incomplete but error-free selections, 0 for any incorrect option |
 | Fill-in-the-blank | semantic similarity scoring with `all-MiniLM-L6-v2`; partial credit is supported |
 
-Overall scores divide the total points by 2,000. Unanswered questions contribute zero.
+Overall and dimension scores average the questions in the tasks the model supports. Unsupported tasks are reported as unavailable. Unanswered questions within supported tasks score zero.
+
+The [evaluation script](evaluation/score.py) computes overall, task, ability, dimension, and question-format scores from model predictions. On your evaluation server, use the benchmark annotation JSON linked above and provide one JSONL record per prediction with the item ID and final answer, for example:
+
+```json
+{"id":"VLRS_00001","answer":"A, C"}
+```
+
+Use option letters for choice questions, `True` or `False` for binary questions, and `BLANK1: ...; BLANK2: ...` for multiple blanks. Fill-in answers are matched using cosine similarity greater than 0.80.
+
+```bash
+python -m pip install -r evaluation/requirements.txt
+python evaluation/score.py --benchmark VLRS-Bench.json --predictions predictions.jsonl
+```
+
+For a single-image model, add `--supported-tasks CR CFR SIR MIR PR ER` to match the task coverage used in the paper. This script scores final answers; generate predictions in the paper's zero-shot setting using the question text and observed RGB images.
 
 ## Results Snapshot
 
@@ -211,6 +226,7 @@ The paper reports zero-shot results for a broad set of general and remote-sensin
 ```text
 VLRS-Bench/
 ├── README.md
+├── evaluation/
 ├── figs/
 │   ├── logo_vlrs.png
 │   ├── primary_rrs.png
