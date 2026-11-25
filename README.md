@@ -10,13 +10,14 @@
 
 [![NeurIPS 2026](https://img.shields.io/badge/NeurIPS-2026-5B3CA4)](https://neurips.cc/virtual/2026/poster/139821)
 [![Preprint](https://img.shields.io/badge/arXiv-2602.07045-b31b1b.svg)](https://arxiv.org/abs/2602.07045)
+[![Project page](https://img.shields.io/badge/Project-Website-176B65.svg)](https://mililab.github.io/VLRS-Bench/)
 [![Dataset](https://img.shields.io/badge/Dataset-Hugging%20Face-FFD21E.svg)](https://huggingface.co/datasets/thislzm/VLRS-Bench)
 [![Project](https://img.shields.io/badge/Project-GitHub-24292f.svg)](https://github.com/MiliLab/VLRS-Bench)
 [![License](https://img.shields.io/badge/License-CC--BY--4.0-green.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 **VLRS-Bench evaluates whether multimodal large language models can reason over geospatial scenes, not merely recognize remote-sensing objects.**
 
-[Overview](#overview) · [Examples](#representative-examples) · [Taxonomy](#reasoning-taxonomy) · [Dataset](#dataset) · [Construction](#construction-pipeline) · [Evaluation](#evaluation) · [Citation](#citation)
+[Project page](https://mililab.github.io/VLRS-Bench/) · [Overview](#overview) · [Examples](#representative-examples) · [Taxonomy](#reasoning-taxonomy) · [Dataset](#dataset) · [Construction](#construction-pipeline) · [Evaluation](#evaluation) · [Citation](#citation)
 
 </div>
 
