@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#122b2e">
+    <meta name="description" content="VLRS-Bench evaluates vision-language reasoning in remote sensing across cognition, decision, and prediction. Explore the paper, benchmark examples, dataset, and code.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="VLRS-Bench | Reasoning over Earth">
+    <meta property="og:description" content="A vision-language reasoning benchmark for remote sensing: 2,000 questions, 14 tasks, and three dimensions.">
+    <meta property="og:image" content="https://mililab.github.io/VLRS-Bench/assets/primary_rrs.png">
+    <title>VLRS-Bench — Reasoning over Earth</title>
+    <link rel="icon" type="image/png" href="assets/logo_vlrs.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="#top" aria-label="VLRS-Bench home">
+          <img src="assets/logo_vlrs.png" width="38" height="38" alt="">
+          <span>VLRS<span class="brand-light">—Bench</span></span>
+        </a>
+        <nav class="primary-nav" aria-label="Main navigation">
+          <a href="#overview">Overview</a>
+          <a href="#dimensions">Dimensions</a>
+          <a href="#construction">Construction</a>
+          <a href="#findings">Findings</a>
+        </nav>
+        <a class="header-link" href="https://arxiv.org/abs/2602.07045" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="shell hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow eyebrow-light"><span class="eyebrow-mark"></span> Vision · Language · Remote Sensing</p>
+            <h1 id="hero-title">Reasoning<br><em>over Earth.</em></h1>
+            <p class="hero-lede">VLRS-Bench asks what multimodal models can <strong>explain, decide, and predict</strong> from remote sensing imagery—not only what they can recognize.</p>
+            <p class="hero-paper-title">A Vision-Language Reasoning Benchmark for Remote Sensing</p>
+            <div class="hero-actions">
+              <a class="button button-accent" href="https://arxiv.org/abs/2602.07045" target="_blank" rel="noopener noreferrer">Explore the paper <span aria-hidden="true">↗</span></a>
+              <a class="button button-outline" href="https://huggingface.co/datasets/thislzm/VLRS-Bench" target="_blank" rel="noopener noreferrer">Access the dataset <span aria-hidden="true">↗</span></a>
+            </div>
+            <p class="hero-authors">Zhiming Luo · Hebaixu Wang · Haonan Guo · Jing Zhang · Bo Du</p>
+          </div>
+          <div class="hero-art">
+            <div class="hero-image-wrap">
+              <img src="assets/example_prediction.png" alt="Eight dated remote sensing observations used in a VLRS-Bench prediction question" fetchpriority="high">
+              <div class="image-overlay">
+                <span class="image-overline">From the paper · Prediction</span>
+                <strong>What happens next?</strong>
+              </div>
+            </div>
+            <span class="orbit orbit-a" aria-hidden="true"></span>
+            <span class="orbit orbit-b" aria-hidden="true"></span>
+            <span class="coordinate coordinate-top" aria-hidden="true">35° 11′ N / 113° 42′ E</span>
+            <span class="coordinate coordinate-bottom" aria-hidden="true">OBSERVATION → INFERENCE</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="stat-wrap shell" aria-label="Benchmark at a glance">
+        <div class="stat"><strong>2,000</strong><span>question–answer pairs</span></div>
+        <div class="stat"><strong>14</strong><span>fine-grained tasks</span></div>
+        <div class="stat"><strong>3,180</strong><span>remote sensing images</span></div>
+        <div class="stat"><strong>8</strong><span>temporal phases, at most</span></div>
+      </div>
+
+      <section class="section intro-section" id="overview" aria-labelledby="overview-title">
+        <div class="shell intro-grid">
+          <div>
+            <p class="eyebrow">01 / The question</p>
+            <h2 id="overview-title">Seeing a scene is only the beginning.</h2>
+          </div>
+          <div class="intro-copy">
+            <p>Remote sensing benchmarks often ask models to recognize objects or classify scenes. Real decisions about places also require causal explanations, plans that respect spatial constraints, and forecasts grounded in change over time.</p>
+            <p>VLRS-Bench organizes these demands into a <strong>three-level reasoning framework</strong>: three dimensions, six ability groups, and fourteen tasks. Its 2,000 questions span four answer formats and draw on ten public remote sensing datasets.</p>
+            <a class="text-link" href="#dimensions">Explore the reasoning framework <span aria-hidden="true">↘</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dimensions-section" id="dimensions" aria-labelledby="dimensions-title">
+        <div class="shell">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">02 / Three dimensions</p>
+              <h2 id="dimensions-title">From <em>why</em> to <em>what next.</em></h2>
+            </div>
+            <p>Each dimension tests a different part of geospatial reasoning. These examples are drawn from the paper.</p>
+          </div>
+          <div class="dimension-grid">
+            <article class="dimension-card cognition">
+              <div class="card-image"><img src="assets/example_cognition.png" alt="Aerial image of an urban block in a causal reasoning example" loading="lazy"></div>
+              <div class="card-body">
+                <span class="card-index">01 <span></span> WHY IS THIS?</span>
+                <h3>Cognition</h3>
+                <p>Explain spatial patterns, mechanisms, counterfactuals, and causal chains across time.</p>
+                <div class="card-foot"><span>8 tasks · 2 ability groups</span><a href="assets/example_cognition.png" target="_blank" rel="noopener noreferrer" aria-label="View full cognition example">View case ↗</a></div>
+              </div>
+            </article>
+            <article class="dimension-card decision">
+              <div class="card-image"><img src="assets/example_decision.png" alt="Aerial image with candidate locations for a planning reasoning question" loading="lazy"></div>
+              <div class="card-body">
+                <span class="card-index">02 <span></span> HOW TO DO?</span>
+                <h3>Decision</h3>
+                <p>Choose a spatial plan or assess a proposal against the constraints visible in a scene.</p>
+                <div class="card-foot"><span>2 tasks · 2 ability groups</span><a href="assets/example_decision.png" target="_blank" rel="noopener noreferrer" aria-label="View full decision example">View case ↗</a></div>
+              </div>
+            </article>
+            <article class="dimension-card prediction">
+              <div class="card-image"><img src="assets/example_prediction.png" alt="Time series of aerial images used to predict a future urban scenario" loading="lazy"></div>
+              <div class="card-body">
+                <span class="card-index">03 <span></span> WHAT WILL HAPPEN?</span>
+                <h3>Prediction</h3>
+                <p>Forecast object and scene evolution from dated observations, including uncertain futures.</p>
+                <div class="card-foot"><span>4 tasks · 2 ability groups</span><a href="assets/example_prediction.png" target="_blank" rel="noopener noreferrer" aria-label="View full prediction example">View case ↗</a></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section taxonomy-section" aria-labelledby="taxonomy-title">
+        <div class="shell">
+          <div class="taxonomy-head">
+            <div>
+              <p class="eyebrow">The complete framework</p>
+              <h2 id="taxonomy-title">A map of reasoning abilities.</h2>
+            </div>
+            <p>The paper’s overview connects the three reasoning dimensions to six ability groups and their fourteen individual tasks.</p>
+          </div>
+          <figure class="paper-figure">
+            <a href="assets/primary_rrs.png" target="_blank" rel="noopener noreferrer" aria-label="Open full-size VLRS-Bench taxonomy figure"><img src="assets/primary_rrs.png" alt="Paper figure showing cognition, decision, and prediction tasks with representative remote sensing examples" loading="lazy"></a>
+            <figcaption><span>FIG. 01 / VLRS-Bench reasoning taxonomy</span><a href="assets/primary_rrs.png" target="_blank" rel="noopener noreferrer">Open full figure ↗</a></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section construction-section" id="construction" aria-labelledby="construction-title">
+        <div class="shell">
+          <div class="construction-head">
+            <div>
+              <p class="eyebrow eyebrow-light">03 / How it is built</p>
+              <h2 id="construction-title">Grounded in remote sensing evidence.</h2>
+            </div>
+            <p>The construction pipeline uses information specific to Earth observation to create reasoning questions, then checks each candidate before release.</p>
+          </div>
+          <figure class="pipeline-figure">
+            <a href="assets/figure_rrs.png" target="_blank" rel="noopener noreferrer" aria-label="Open full-size construction pipeline figure"><img src="assets/figure_rrs.png" alt="Paper figure showing multi-source imagery and expert priors feeding question generation, model cross-verification, and expert review" loading="lazy"></a>
+            <figcaption><span>FIG. 02 / Construction pipeline</span><a href="assets/figure_rrs.png" target="_blank" rel="noopener noreferrer">Open full figure ↗</a></figcaption>
+          </figure>
+          <div class="construction-steps">
+            <div><span>01 / SOURCE</span><h3>Real scenes</h3><p>Single-date and multi-date imagery from ten public remote sensing datasets.</p></div>
+            <div><span>02 / GROUND</span><h3>Domain priors</h3><p>DSM, near-infrared imagery, expert masks, timestamps, and dataset context inform question design.</p></div>
+            <div><span>03 / VERIFY</span><h3>Quality review</h3><p>Automated checks, model cross-verification, and remote sensing expert review select the final 2,000 items.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section findings-section" id="findings" aria-labelledby="findings-title">
+        <div class="shell findings-grid">
+          <div class="findings-copy">
+            <p class="eyebrow">04 / What the experiments reveal</p>
+            <h2 id="findings-title">The answer format changes the challenge.</h2>
+            <p>Across evaluated models with available format-level results, single-choice and true/false questions score much higher on average than multi-choice and fill-in-the-blank questions.</p>
+            <p>The paper also finds that models struggle with causal mechanisms, spatial planning under constraints, and forecasting scene-level change. A single overall score can hide these different weaknesses.</p>
+            <a class="text-link" href="https://arxiv.org/pdf/2602.07045" target="_blank" rel="noopener noreferrer">Read the analysis in the paper <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="results-panel" role="img" aria-label="Mean scores by question format: single-choice 52.6 percent, true or false 47.5 percent, multi-choice 16.6 percent, fill in the blank 9.0 percent">
+            <div class="results-panel-head"><span>Mean score by question format</span><span>Higher is better</span></div>
+            <div class="result-row"><div><span>Single-choice</span><strong>52.6%</strong></div><div class="bar-track"><span style="--bar:52.6%"></span></div></div>
+            <div class="result-row"><div><span>True / false</span><strong>47.5%</strong></div><div class="bar-track"><span style="--bar:47.5%"></span></div></div>
+            <div class="result-row"><div><span>Multi-choice</span><strong>16.6%</strong></div><div class="bar-track"><span style="--bar:16.6%"></span></div></div>
+            <div class="result-row"><div><span>Fill in the blank</span><strong>9.0%</strong></div><div class="bar-track"><span style="--bar:9%"></span></div></div>
+            <p class="results-note">Reported averages in the paper for evaluated models with a QA-format breakdown. Formats use different scoring rules; see the paper for the full evaluation protocol.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section value-section" aria-labelledby="value-title">
+        <div class="shell">
+          <p class="eyebrow">Why VLRS-Bench</p>
+          <h2 id="value-title">A benchmark built to reveal <em>how</em> models reason.</h2>
+          <div class="value-grid">
+            <div><span class="value-symbol">↳</span><h3>Structured diagnosis</h3><p>Three dimensions, six ability groups, and fourteen tasks expose strengths and weaknesses beyond a single score.</p></div>
+            <div><span class="value-symbol">◎</span><h3>Geospatial grounding</h3><p>Task construction draws on elevation, near-infrared imagery, annotated masks, and dated observations.</p></div>
+            <div><span class="value-symbol">✳</span><h3>Reviewed questions</h3><p>Automated filtering, model checks, and expert review screen candidates for visual grounding and logical quality.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section resources-section" id="resources" aria-labelledby="resources-title">
+        <div class="shell">
+          <div class="resources-head">
+            <p class="eyebrow eyebrow-light">05 / Continue exploring</p>
+            <h2 id="resources-title">Paper. Data. Code.</h2>
+            <p>Start with the full study, inspect the released benchmark, or run the open evaluation script.</p>
+          </div>
+          <div class="resource-grid">
+            <a href="https://arxiv.org/abs/2602.07045" target="_blank" rel="noopener noreferrer"><span>01 / PREPRINT</span><strong>Read the paper</strong><small>arXiv:2602.07045 · v3</small><b aria-hidden="true">↗</b></a>
+            <a href="https://huggingface.co/datasets/thislzm/VLRS-Bench" target="_blank" rel="noopener noreferrer"><span>02 / BENCHMARK</span><strong>Explore the dataset</strong><small>Question–answer pairs and imagery</small><b aria-hidden="true">↗</b></a>
+            <a href="https://github.com/MiliLab/VLRS-Bench" target="_blank" rel="noopener noreferrer"><span>03 / REPOSITORY</span><strong>View the code</strong><small>Documentation and evaluation</small><b aria-hidden="true">↗</b></a>
+          </div>
+          <div class="citation">
+            <div><p class="eyebrow eyebrow-light">Citation · NeurIPS 2026</p><h3>Cite VLRS-Bench</h3></div>
+            <pre id="bibtex"><code>@inproceedings{luo2026vlrsbench,
+  title     = {VLRS-Bench: A Vision-Language Reasoning Benchmark for Remote Sensing},
+  author    = {Luo, Zhiming and Wang, Hebaixu and Guo, Haonan and Zhang, Jing and Du, Bo},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026},
+  note      = {Evaluations and Datasets Track},
+  url       = {https://neurips.cc/virtual/2026/poster/139821}
+}</code></pre>
+            <button class="copy-button" type="button" data-copy="bibtex" aria-label="Copy BibTeX citation">Copy BibTeX</button>
+            <a class="citation-source" href="https://neurips.cc/virtual/2026/poster/139821" target="_blank" rel="noopener noreferrer">NeurIPS paper page ↗</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner"><span>VLRS—Bench</span><p>A Vision-Language Reasoning Benchmark for Remote Sensing</p><a href="#top">Back to top ↑</a></div>
+    </footer>
+    <script src="script.js" defer></script>
+  </body>
+</html>
